@@ -1,0 +1,32 @@
+### Pruebas del API Gateway (extensión "REST Client" de VS Code, o copia los curl)
+### Todas las peticiones van al gateway (:8080), nunca directo a 8081/8082.
+
+### Información del gateway
+GET http://localhost:8080/
+
+### Salud del gateway
+GET http://localhost:8080/health
+
+### 1. Crear producto  (-> EjemploQuarkus)
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+
+{ "nombre": "Mouse", "precio": 250.0 }
+
+### 2. Listar productos
+GET http://localhost:8080/api/productos
+
+### 3. Producto por id
+GET http://localhost:8080/api/productos/1
+
+### 4. Crear orden  (-> OrdenQuarkus, que consulta el precio al servicio de productos)
+POST http://localhost:8080/api/ordenes
+Content-Type: application/json
+
+{ "productoId": 1, "cantidad": 2 }
+
+### 5. Listar órdenes
+GET http://localhost:8080/api/ordenes
+
+### 6. Ruta inexistente (404 JSON del gateway)
+GET http://localhost:8080/api/clientes

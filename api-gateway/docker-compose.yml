@@ -1,0 +1,14 @@
+# API Gateway en Docker. Los microservicios Quarkus siguen corriendo en tu equipo
+# (NetBeans / mvn quarkus:dev); el contenedor los alcanza con host.docker.internal.
+services:
+  api-gateway:
+    image: nginx:1.27-alpine
+    container_name: api-gateway
+    ports:
+      - "8080:8080"   # REST (HTTP/1.1)
+      - "9090:9090"   # gRPC (HTTP/2)
+    volumes:
+      - ./conf/nginx.docker.conf:/etc/nginx/nginx.conf:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # necesario en Linux; en Windows/Mac ya existe
+    restart: unless-stopped

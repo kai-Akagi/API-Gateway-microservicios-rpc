@@ -1,0 +1,4 @@
+/OrdenQuarkus/target/
+/EjemploQuarkus/target/
+/api-gateway/logs/*.log
+/api-gateway/logs/nginx.pid

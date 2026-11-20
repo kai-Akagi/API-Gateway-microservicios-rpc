@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.mycompany.ordenquarkus.grpc";
+option java_outer_classname = "OrdenProto";
+
+package ordenes;
+
+// Servicio RPC de órdenes (mismas operaciones que el REST /ordenes)
+service OrdenService {
+  rpc ObtenerTodas (VacioRequest) returns (ListaOrdenesReply);
+  rpc Crear (NuevaOrdenRequest) returns (OrdenMensaje);
+}
+
+message VacioRequest {}
+
+message NuevaOrdenRequest {
+  int64 producto_id = 1;
+  int32 cantidad = 2;
+}
+
+message OrdenMensaje {
+  int64 id = 1;
+  int64 producto_id = 2;
+  int32 cantidad = 3;
+  double total = 4;
+}
+
+message ListaOrdenesReply {
+  repeated OrdenMensaje ordenes = 1;
+}

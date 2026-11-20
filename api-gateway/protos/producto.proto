@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.mycompany.ejemploquarkus.grpc";
+option java_outer_classname = "ProductoProto";
+
+package productos;
+
+// Servicio RPC de productos (mismas operaciones que el REST /productos)
+service ProductoService {
+  rpc ObtenerTodos (VacioRequest) returns (ListaProductosReply);
+  rpc ObtenerPorId (ProductoIdRequest) returns (ProductoMensaje);
+  rpc Crear (NuevoProductoRequest) returns (ProductoMensaje);
+}
+
+message VacioRequest {}
+
+message ProductoIdRequest {
+  int64 id = 1;
+}
+
+message NuevoProductoRequest {
+  string nombre = 1;
+  double precio = 2;
+}
+
+message ProductoMensaje {
+  int64 id = 1;
+  string nombre = 2;
+  double precio = 3;
+}
+
+message ListaProductosReply {
+  repeated ProductoMensaje productos = 1;
+}
